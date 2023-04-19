@@ -1,0 +1,18 @@
+body {
+    background: #878282d8 !important;
+    /* position: relative; */
+}
+
+nav {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.overlay {
+	position: absolute;
+	min-height: 96vh;
+	min-width: 100vw;
+	left: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.6);
+    margin-top: 3.5rem;
+}
