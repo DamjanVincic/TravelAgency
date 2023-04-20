@@ -12,3 +12,8 @@ div.card {
 	background: rgba(0, 0, 0, 0.4);
 	color: white;
 }
+
+.card-img-top {
+	height: 15rem;
+	object-fit: cover;
+}
