@@ -8,7 +8,7 @@ nav {
 }
 
 div.card {
-	background: rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.6);
 	color: white;
 }
 
@@ -30,4 +30,13 @@ div.card {
 
 .cover {
 	background-color:rgba(0, 0, 0, 0.6);
+}
+
+.card .mask{
+	height: 15rem;
+}
+
+.btn {
+	text-transform: capitalize;
+	font-size: 1rem;
 }
