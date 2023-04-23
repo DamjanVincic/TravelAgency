@@ -17,8 +17,8 @@ nav {
 } */
 
 .card-img-top, div.carousel-item img {
-	/* height: 15rem; */
-	height: 22.5rem;
+	height: 15rem;
+	/* height: 22.5rem; */
 	object-fit: cover;
 }
 
