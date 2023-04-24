@@ -1,0 +1,1 @@
+Stranica za izmenu podataka pojedinacne destinacije se nalazi u dropdown meniju Admin Panel u navbaru.
