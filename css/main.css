@@ -1,6 +1,8 @@
 body {
 	/* background: #9ec1d7 !important; */
 	background: white !important;
+	position: relative;
+	z-index: -1;
 }
 
 nav {
