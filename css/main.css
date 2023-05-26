@@ -5,6 +5,10 @@ body {
 	z-index: -1;
 }
 
+body.modal-open {
+	overflow: hidden;
+}
+
 nav {
     background: rgba(0, 0, 0, 0.4);
 }
@@ -48,7 +52,7 @@ nav {
 }
 
 .btn {
-	text-transform: capitalize;
+	text-transform: none;
 	font-size: 1rem;
 }
 
