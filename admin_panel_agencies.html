@@ -85,8 +85,8 @@
                                 <th scope="col">Naziv</th>
                                 <th scope="col">Adresa</th>
                                 <th scope="col">Godina</th>
-                                <th scope="col">Broj</th>
-                                <td scope="col">Email</td>
+                                <th scope="col">Broj telefona</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Opcije</th>
                             </tr>
                         </thead>
@@ -99,8 +99,8 @@
                                 <td>011/3232-784323</td>
                                 <td>airserbia381@mail.com</td>
                                 <td>
-                                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyEdit"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyDelete"><i class="bi bi-trash"></i></button>
                                 </td>
                             </tr>
                             <tr>
@@ -111,8 +111,8 @@
                                 <td>011/3232-784323</td>
                                 <td>airserbia381@mail.com</td>
                                 <td>
-                                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyEdit"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyDelete"><i class="bi bi-trash"></i></button>
                                 </td>
                             </tr>
                             <tr>
@@ -123,8 +123,8 @@
                                 <td>011/3232-784323</td>
                                 <td>airserbia381@mail.com</td>
                                 <td>
-                                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyEdit"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyDelete"><i class="bi bi-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -151,6 +151,75 @@
             </div>
         </div>
     </footer>
+
+    <div class="modal fade" id="agencyEdit" tabindex="-1" aria-labelledby="agencyEditLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agencyEditLabel">Izmena agencije</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-outline mb-4">
+                            <input type="text" name="naziv" id="nameEdit" class="form-control" value="Trenutna vrednost agencije" />
+                            <label for="nameEdit" class="form-label">Naziv</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <input type="text" name="adresa" id="addressEdit" class="form-control" value="Trenutna vrednost agencije" />
+                            <label for="addressEdit" class="form-label">Adresa</label>
+                        </div>
+                      
+                        <div class="form-outline mb-4">
+                            <input type="text" name="godina" id="yearEdit" class="form-control" value="Trenutna vrednost agencije" />
+                            <label class="form-label" for="yearEdit">Godina</label>
+                        </div>
+                        
+                        <div class="form-outline mb-4">
+                            <input type="text" name="logo" id="logoEdit" class="form-control" value="Trenutna vrednost agencije" />
+                            <label for="logoEdit" class="form-label">Logo</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="text" name="brojTelefona" id="phoneEdit" class="form-control" value="Trenutna vrednost agencije" />
+                            <label for="phoneEdit" class="form-label">Broj telefona</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="email" name="email" id="emailEdit" class="form-control" value="Trenutna vrednost agencije" />
+                            <label for="emailEdit" class="form-label">Email</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="text" name="destinacije" id="destinationsIDEdit" class="form-control" value="Trenutna vrednost agencije" />
+                            <label for="destinationsIDEdit" class="form-label">Destinacije</label>
+                        </div>
+                      
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Izmeni agenciju</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="agencyDelete" tabindex="-1" aria-labelledby="agencyDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agencyDeleteLabel">Brisanje agencije</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Da li ste sigurni da želite da obrišete agenciju</p>
+                    <p><b>--Ovde ime agencije--</b></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-mdb-dismiss="modal">Ne</button>
+                    <button type="button" class="btn btn-danger">Da</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
