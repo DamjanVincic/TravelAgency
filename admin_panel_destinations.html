@@ -101,8 +101,8 @@
                                 <td>77898</td>
                                 <td>50</td>
                                 <td>
-                                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#destinationEdit"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#destinationDelete"><i class="bi bi-trash"></i></button>
                                 </td>
                             </tr>
                             <tr>
@@ -114,8 +114,8 @@
                                 <td>77898</td>
                                 <td>50</td>
                                 <td>
-                                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#destinationEdit"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#destinationDelete"><i class="bi bi-trash"></i></button>
                                 </td>
                             </tr>
                             <tr>
@@ -127,8 +127,8 @@
                                 <td>77898</td>
                                 <td>50</td>
                                 <td>
-                                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#destinationEdit"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#destinationDelete"><i class="bi bi-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -155,6 +155,83 @@
             </div>
         </div>
     </footer>
+
+    <div class="modal fade" id="destinationEdit" tabindex="-1" aria-labelledby="destinationEditLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destinationEditLabel">Izmena destinacije</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-outline mb-4">
+                            <input type="text" name="naziv" id="nameEdit" class="form-control" value="Trenutna vrednost destinacije" />
+                            <label for="nameEdit" class="form-label">Naziv</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <input type="textarea" name="opis" id="descriptionEdit" class="form-control" value="Trenutna vrednost destinacije" />
+                            <label for="descriptionEdit" class="form-label">Opis</label>
+                        </div>
+                      
+                        <div class="form-outline mb-4">
+                            <input type="textarea" name="slike" id="imagesEdt" class="form-control" value="Trenutna vrednost destinacije" />
+                            <label for="imagesEdit" class="form-label">Slike</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="number" name="cena" id="priceEdit" class="form-control" value="000" />
+                            <label for="priceEdit" class="form-label">Cena</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="number" name="maxOsoba" id="maxNumberOfPeopleEdit" class="form-control" value="000" />
+                            <label for="maxNumberOfPeopleEdit" class="form-label">Max broj osoba</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <select class="form-select" name="tip" id="vacationTypeEdit">
+                                <option selected>Tip letovanja</option>
+                                <option value="Gradovi Evrope">Gradovi Evrope</option>
+                                <option value="Letovanje">Letovanje</option>
+                                <option value="Zimovanje">Zimovanje</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-outline mb-4">
+                            <select class="form-select" name="prevoz" id="transportationEdit">
+                                <option selected>Tip prevoza</option>
+                                <option value="sopstveni">Sopstveni</option>
+                                <option value="autobus">Autobus</option>
+                                <option value="avion">Avion</option>
+                            </select>
+                        </div>
+                      
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Izmeni agenciju</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="destinationDelete" tabindex="-1" aria-labelledby="destinationDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destinationDeleteLabel">Brisanje destinacije</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Da li ste sigurni da želite da obrišete destinaciju</p>
+                    <p><b>--Ovde naziv destinacije--</b></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-mdb-dismiss="modal">Ne</button>
+                    <button type="button" class="btn btn-danger">Da</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
