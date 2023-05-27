@@ -24,26 +24,27 @@ const loadData = async () => {
     destination_data_edit.insertBefore(row, destination_data_edit.getElementsByClassName("mb-5")[0]);
 }
 
-const destinationTemplate = destination => `<div class="col-md-6 mb-5" style="padding-left: 10rem; padding-right: 10rem;">
+const destinationTemplate = destination => `<div class="col-md-6 mb-5" style="padding-left: 7.5rem; padding-right: 7.5rem;">
                                                 <div class="text-center">
                                                     <input type="text" name="naziv" id="nameEdit" class="form-control mb-4" value="${destination.naziv}" placeholder="Naziv" />
                                                     
-                                                    <input type="text" name="tip" id="vacationTypeEdit" class="form-control mb-4" value="${destination.tip}" placeholder="Tip letovanja" />
+                                                    <input type="text" name="tip" id="vacationTypeEdit" class="form-control mb-4" value="${destination.tip}" placeholder="Tip odmora" />
                                                     
                                                     <input type="text" name="prevoz" id="transportationEdit" class="form-control mb-4" value="${destination.prevoz}" placeholder="Tip prevoza" />
                                                     
                                                     <input type="text" name="cena" id="priceEdit" class="form-control mb-4" value="${destination.cena}" placeholder="Cena" />
                                                     
                                                     <input type="text" name="maxOsoba" id="maxNumberOfPeopleEdit" class="form-control" value="${destination.maxOsoba}" placeholder="Broj osoba" />
-                                                    
-                                                    <a href="destination.html?id=${urlParams.get("id")}&destination_group_id=${urlParams.get("destination_group_id")}" class="btn btn-outline-danger mt-4">Odustani</a>
-                                                    <button class="btn btn-outline-primary mt-4">Izmeni</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 overflow-auto" style="max-height: 20rem;">
                                                 <textarea class="form-control mt-3 mb-4" name="opis" id="descriptionEdit" rows="4" placeholder="Opis">${destination.opis}</textarea>
                                                 
                                                 <textarea class="form-control" name="slike" id="imagesEdit" rows="4" placeholder="Slike">${destination.slike.join("\n")}</textarea>
+                                            </div>
+                                            <div class="col-md text-center">
+                                                <a href="destination.html?id=${urlParams.get("id")}&destination_group_id=${urlParams.get("destination_group_id")}" class="btn btn-outline-danger mt-4">Odustani</a>
+                                                <button class="btn btn-outline-primary mt-4">Izmeni</button>
                                             </div>`
 
 
