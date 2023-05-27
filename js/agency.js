@@ -45,7 +45,7 @@ const loadData = async () => {
             row = document.createElement("div");
             row.classList.add("row");
         }
-        row.innerHTML += destinationTemplate(destinations[id], id);
+        row.innerHTML += destinationTemplate(destinations[id], id, agency.destinacije);
         count++;
     }
     destination_list.insertBefore(row, destination_list.getElementsByClassName("my-5")[1]);
@@ -79,7 +79,7 @@ const getCarouselInner = (images) => {
     return carousel_inner.innerHTML;
 }
 
-const destinationTemplate = (destination, id) => {
+const destinationTemplate = (destination, id, destination_group_id) => {
     return `<div class="col-md-4">
                 <div class="card mb-5" style="max-height: 50rem;">
                     <div id="${id}" class="carousel slide">
@@ -99,7 +99,7 @@ const destinationTemplate = (destination, id) => {
                     <div class="card-body overflow-auto">
                         <h5 class="card-title">${destination.naziv}</h5>
                         <p><i class="bi bi-airplane"></i> ${destination.tip}<br/><i class="bi bi-bus-front"></i> ${destination.prevoz}<br/><i class="bi bi-currency-dollar"></i>${destination.cena}<br/><i class="bi bi-person"></i> ${destination.maxOsoba}</p>
-                        <a href="destination.html?id=${id}" class="btn btn-primary">Detalji</a>
+                        <a href="destination.html?id=${id}&destination_group_id=${destination_group_id}" class="btn btn-primary">Detalji</a>
                     </div>
                 </div>
             </div>`
