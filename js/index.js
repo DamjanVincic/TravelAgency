@@ -21,14 +21,14 @@ const loadData = async () => {
             row.classList.add("row");
             // row.appendChild(template(agencies[id]));
         }
-        row.innerHTML += agencyTemplate(agencies[id]);
+        row.innerHTML += agencyTemplate(agencies[id], id);
         count++;
     }
     // agency_list.appendChild(row);
     agency_list.insertBefore(row, agency_list.getElementsByClassName("my-5")[1]);
 }
 
-const agencyTemplate = agency => `<div class="col-md-4">
+const agencyTemplate = (agency, id) => `<div class="col-md-4">
                                 <div class="card mb-5">
                                     <div class="ripple hover-overlay" data-mdb-ripple-color="light">
                                         <img class="card-img-top" src="${agency.logo}" alt="${agency.name}">
@@ -39,10 +39,10 @@ const agencyTemplate = agency => `<div class="col-md-4">
                                     <div class="card-body">
                                         <h5 class="card-title">${agency.naziv}</h5>
                                         <p class="card-text"><i class="bi bi-envelope"></i> ${agency.email}<br/><i class="bi bi-geo-alt"></i> ${agency.adresa}<br/><i class="bi bi-telephone"></i> ${agency.brojTelefona}<br/><i class="bi bi-clock"></i> ${agency.godina}</p>
-                                        <a href="agency.html" class="btn btn-primary">Detalji</a>
+                                        <a href="agency.html?id=${id}" class="btn btn-primary">Detalji</a>
                                     </div>
                                 </div>
                             </div>`;
 
 
-loadData();
+document.addEventListener("DOMContentLoaded", loadData);
