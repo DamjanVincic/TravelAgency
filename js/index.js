@@ -14,7 +14,8 @@ const loadData = async () => {
     for (var id in agencies) {
         if (count%3 == 0) {
             if (row != null) {
-                agency_list.appendChild(row);
+                // agency_list.appendChild(row);
+                agency_list.insertBefore(row, agency_list.getElementsByClassName("my-5")[1]);
             }
             row = document.createElement("div");
             row.classList.add("row");
@@ -23,7 +24,8 @@ const loadData = async () => {
         row.innerHTML += agencyTemplate(agencies[id]);
         count++;
     }
-    agency_list.appendChild(row);
+    // agency_list.appendChild(row);
+    agency_list.insertBefore(row, agency_list.getElementsByClassName("my-5")[1]);
 }
 
 const agencyTemplate = agency => `<div class="col-md-4">
