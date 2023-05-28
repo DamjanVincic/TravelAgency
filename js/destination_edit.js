@@ -28,13 +28,27 @@ const destinationTemplate = destination => `<div class="col-md-6 mb-5" style="pa
                                                 <div class="text-center">
                                                     <input type="text" name="naziv" id="nameEdit" class="form-control mb-4" value="${destination.naziv}" placeholder="Naziv" />
                                                     
-                                                    <input type="text" name="tip" id="vacationTypeEdit" class="form-control mb-4" value="${destination.tip}" placeholder="Tip odmora" />
+                                                    <input type="number" name="cena" id="priceEdit" class="form-control mb-4" value="${destination.cena}" placeholder="Cena" />
                                                     
-                                                    <input type="text" name="prevoz" id="transportationEdit" class="form-control mb-4" value="${destination.prevoz}" placeholder="Tip prevoza" />
-                                                    
-                                                    <input type="text" name="cena" id="priceEdit" class="form-control mb-4" value="${destination.cena}" placeholder="Cena" />
-                                                    
-                                                    <input type="text" name="maxOsoba" id="maxNumberOfPeopleEdit" class="form-control" value="${destination.maxOsoba}" placeholder="Broj osoba" />
+                                                    <input type="number" name="maxOsoba" id="maxNumberOfPeopleEdit" class="form-control mb-4" value="${destination.maxOsoba}" placeholder="Broj osoba" />
+
+                                                    <div class="form-outline mb-4">
+                                                        <select class="form-select" name="tip" id="vacationTypeEdit">
+                                                            <option selected>Tip letovanja</option>
+                                                            <option value="Gradovi Evrope">Gradovi Evrope</option>
+                                                            <option value="Letovanje">Letovanje</option>
+                                                            <option value="Zimovanje">Zimovanje</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-outline mb-4">
+                                                        <select class="form-select" name="prevoz" id="transportationEdit">
+                                                            <option selected>Tip prevoza</option>
+                                                            <option value="sopstveni">Sopstveni</option>
+                                                            <option value="autobus">Autobus</option>
+                                                            <option value="avion">Avion</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 overflow-auto" style="max-height: 20rem;">
