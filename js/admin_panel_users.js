@@ -34,7 +34,7 @@ const userTemplate = (user, id, count) => `<tr>
                                                 <td>${user.telefon}</td>
                                                 <td>
                                                     <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#userEdit"><i class="bi bi-pencil"></i></button>
-                                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#userDelete" data-id="${id}" data-username="${user.korisnickoIme}"><i class="bi bi-trash"></i></button>
+                                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#userDelete" data-userid="${id}" data-username="${user.korisnickoIme}"><i class="bi bi-trash"></i></button>
                                                 </td>
                                             </tr>`
 
@@ -42,8 +42,24 @@ document.addEventListener("DOMContentLoaded", loadData);
 
 $('#userDelete').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
-    // var id = button.data('id')
+    var id = button.data('userid')
     var username = button.data('username')
     var modal = $(this)
     modal.find('#userDeleteName').text(`${username}`)
+    $('#userDeleteButton').data("userid", id)
+})
+
+$("#userDeleteButton").on("click", async () => {
+    var button = $("#userDeleteButton")
+    var id = button.data("userid");
+    // console.log(id)
+    await fetch(`${databaseURL}/korisnici/${id}.json`, {
+        method: "DELETE"
+    });
+
+    var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Uspesno izbrisan korisnik.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+    $("#alertPlaceholder").html(alertHTML);
 })

@@ -50,4 +50,4 @@ $('#agencyDelete').on('show.bs.modal', function (event) {
     var name = button.data('name')
     var modal = $(this)
     modal.find('#agencyDeleteName').text(`${name}`)
-  })
+})
