@@ -38,8 +38,16 @@ const agencyTemplate = (agency, id, count) => `<tr>
                                                     <td>
                                                         <!-- <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyEdit"><i class="bi bi-pencil"></i></button> -->
                                                         <a href="agency_edit.html?id=${id}" class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></a>
-                                                        <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyDelete"><i class="bi bi-trash"></i></button>
+                                                        <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyDelete" data-id="${id}" data-name="${agency.naziv}"><i class="bi bi-trash"></i></button>
                                                     </td>
                                                 </tr>`
 
 document.addEventListener("DOMContentLoaded", loadData);
+
+$('#agencyDelete').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    // var id = button.data('id')
+    var name = button.data('name')
+    var modal = $(this)
+    modal.find('#agencyDeleteName').text(`${name}`)
+  })
