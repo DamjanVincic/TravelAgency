@@ -43,7 +43,7 @@ const destinationTemplate = destination => `<div class="col-md-6 mb-5">
                                                     <a href="destination_edit.html?id=${urlParams.get("id")}&destination_group_id=${urlParams.get("destination_group_id")}" class="btn btn-outline-primary mt-4">Izmeni</a>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 overflow-auto d-flex align-items-center" style="max-height: 12.5rem;">
+                                            <div class="col-md-6 overflow-auto" style="max-height: 12.5rem;">
                                                 <p>${destination.opis}</p>
                                             </div>`
 
