@@ -92,49 +92,8 @@
                                 <th scope="col">Opcije</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>petar</td>
-                                <td>Petar</td>
-                                <td>Petrović</td>
-                                <td>ppetrovic@webd.com</td>
-                                <td>1994-10-22</td>
-                                <td>Gogoljeva 39, Novi Sad,21000</td>
-                                <td>061456456</td>
-                                <td>
-                                    <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#userEdit"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#userDelete"><i class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>petar</td>
-                                <td>Petar</td>
-                                <td>Petrović</td>
-                                <td>ppetrovic@webd.com</td>
-                                <td>1994-10-22</td>
-                                <td>Gogoljeva 39, Novi Sad,21000</td>
-                                <td>061456456</td>
-                                <td>
-                                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>petar</td>
-                                <td>Petar</td>
-                                <td>Petrović</td>
-                                <td>ppetrovic@webd.com</td>
-                                <td>1994-10-22</td>
-                                <td>Gogoljeva 39, Novi Sad,21000</td>
-                                <td>061456456</td>
-                                <td>
-                                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="usersTable">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -229,7 +188,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Da li ste sigurni da želite da obrišete korisnika</p>
-                    <p><b>--Ovde korisnicko ime korisnika--</b></p>
+                    <p><b id="userDeleteName"></b></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-primary" data-mdb-dismiss="modal">Ne</button>
@@ -331,5 +290,6 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> -->
     <script src="bootstrap-5.0.2-dist/js/jquery-3.3.1.min.js"></script>
     <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin_panel_users.js"></script>
 </body>
 </html>
