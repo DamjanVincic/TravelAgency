@@ -16,6 +16,7 @@ const loadData = async () => {
     var users = await getUsers();
 
     var users_table = document.getElementById("usersTable");
+    users_table.innerHTML = "";
     var count = 1;
     for (id in users) {
         users_table.innerHTML += userTemplate(users[id], id, count);
@@ -49,16 +50,17 @@ $('#userDelete').on('show.bs.modal', function (event) {
     $('#userDeleteButton').data("userid", id)
 })
 
-$("#userDeleteButton").on("click", async () => {
+$("#userDeleteButton").on("click", () => {
     var button = $("#userDeleteButton")
     var id = button.data("userid");
     // console.log(id)
-    await fetch(`${databaseURL}/korisnici/${id}.json`, {
+    fetch(`${databaseURL}/korisnici/${id}.json`, {
         method: "DELETE"
     })
     .then(resp => {
         if (resp.ok) {
             // window.location.reload();
+            loadData();
             var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
                                 Uspesno izbrisan korisnik.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
