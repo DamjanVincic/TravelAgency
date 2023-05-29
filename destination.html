@@ -97,6 +97,10 @@
         </div>
     </footer>
 
+    <div id="registerAlertPlaceholder" style="position: fixed; bottom: 0; left: 2rem">
+        
+    </div>
+
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -105,48 +109,52 @@
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="registerForm" class="needs-validation" novalidate>
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-outline">
-                                    <input type="text" name="ime" id="firstname" class="form-control" />
+                                    <input type="text" name="ime" id="firstname" class="form-control" required />
                                     <label class="form-label" for="firstname">Ime</label>
+                                    <!-- <div class="invalid-feedback">Unesite ime</div> -->
                                 </div>
                             </div>
                           <div class="col">
                                 <div class="form-outline">
-                                    <input type="text" name="prezime" id="lastname" class="form-control" />
+                                    <input type="text" name="prezime" id="lastname" class="form-control" required />
                                     <label class="form-label" for="lastname">Prezime</label>
                                 </div>
                           </div>
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="text" name="korisnickoIme" id="usernameRegister" class="form-control" />
+                            <input type="text" name="korisnickoIme" id="usernameRegister" class="form-control" required />
                             <label for="usernameRegister" class="form-label">Korisnicko Ime</label>
+                            <!-- <div class="invalid-feedback">Korisnicko ime ne sme da sadrzi razmake</div> -->
+                            <div class="invalid-tooltip">Korisnicko ime ne sme da ima razmake</div>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="password" name="lozinka" id="passwordRegister" class="form-control" />
+                            <input type="password" name="lozinka" id="passwordRegister" class="form-control" required />
                             <label for="passwordRegister" class="form-label">Lozinka</label>
+                            <div class="invalid-tooltip">Lozinka mora da ima bar 8 karaktera.</div>
                         </div>
                       
                         <div class="form-outline mb-4">
-                            <input type="email" name="email" id="email" class="form-control" />
+                            <input type="email" name="email" id="email" class="form-control" required />
                             <label class="form-label" for="email">Email adresa</label>
                         </div>
                         
                         <div class="form-outline mb-4">
-                            <input type="date" name="datumRodjenja" id="birthday" class="form-control" />
+                            <input type="date" name="datumRodjenja" id="birthday" class="form-control" required />
                             <!-- <label for="birthday" class="form-label">Datum rodjenja</label> -->
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="text" name="adresa" id="address" class="form-control" />
+                            <input type="text" name="adresa" id="address" class="form-control" required />
                             <label for="address" class="form-label">Adresa</label>
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="text" name="telefon" id="phone" class="form-control" />
+                            <input type="text" name="telefon" id="phone" class="form-control" required />
                             <label for="phone" class="form-label">Telefon</label>
                         </div>
                       
@@ -190,5 +198,6 @@
     <script src="bootstrap-5.0.2-dist/js/jquery-3.3.1.min.js"></script>
     <!-- <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="js/destination.js"></script>
+    <script src="js/login_register.js"></script>
 </body>
 </html>
