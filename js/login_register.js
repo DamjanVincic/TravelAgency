@@ -33,6 +33,9 @@ registerForm.addEventListener("submit", (event) => {
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>`;
                 document.getElementById("registerAlertPlaceholder").innerHTML = alertHTML;
+
+                registerForm.reset();
+                registerForm.classList.remove("was-validated");
             } else {
                 window.location.replace("error.html");
             }
@@ -81,3 +84,47 @@ const validateEmail = (email) => {
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };
+
+
+var loginForm = document.getElementById("loginForm");
+var usernameLogin = document.getElementById("usernameLogin");
+var passwordLogin = document.getElementById("passwordLogin");
+
+loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (loginForm.checkValidity()) {
+        var users = await fetch(`${databaseURL}korisnici.json`)
+                            .then(response => response.json());
+        var found = false;
+        for (let id in users) {
+            let user = users[id];
+            if (user['korisnickoIme'] === usernameLogin.value && user['lozinka'] === passwordLogin.value) {
+                found = true;
+                break;
+            }
+        }
+        
+        var alertHTML = null;
+        if (found) {
+            loginModal.getElementsByClassName("btn-close")[0].click();
+
+            alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Uspesno ste se ulogovali.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+            loginForm.reset();
+            loginForm.classList.remove("was-validated");
+        } else {
+            alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Korisnik sa unetim podacima ne postoji.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+        }
+        document.getElementById("loginAlertPlaceholder").innerHTML = alertHTML;
+
+    } else {
+        loginForm.classList.add("was-validated");
+    }
+})
