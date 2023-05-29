@@ -55,11 +55,18 @@ $("#userDeleteButton").on("click", async () => {
     // console.log(id)
     await fetch(`${databaseURL}/korisnici/${id}.json`, {
         method: "DELETE"
+    })
+    .then(resp => {
+        if (resp.ok) {
+            // window.location.reload();
+            var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                Uspesno izbrisan korisnik.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`;
+            $("#alertPlaceholder").html(alertHTML);
+        }
+        else {
+            window.location.replace("error.html");
+        }
     });
-
-    var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        Uspesno izbrisan korisnik.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`;
-    $("#alertPlaceholder").html(alertHTML);
 })
