@@ -44,13 +44,13 @@ const agencyDataTemplate = (agency) => `<div class="col-md-12 mb-5" style="paddi
                                                 
                                                 <input type="text" name="adresa" id="addressEdit" class="form-control mb-4" value="${agency.adresa}" placeholder="Adresa" required />
                                                 
-                                                <input type="text" name="logo" id="logoEdit" class="form-control mb-4" value="${agency.logo}" placeholder="Logo" required />
+                                                <input type="text" name="logo" id="logoEdit" class="form-control mb-4" value="${agency.logo}" placeholder="Logo" oninput="validateLogo()" required />
                                                 
                                                 <input type="number" name="godina" id="yearEdit" class="form-control mb-4" value="${agency.godina}" placeholder="Godina" required />
 
-                                                <input type="text" name="brojTelefona" id="phoneEdit" class="form-control mb-4" value="${agency.brojTelefona}" placeholder="Broj telefona" required />
+                                                <input type="text" name="brojTelefona" id="phoneEdit" class="form-control mb-4" value="${agency.brojTelefona}" placeholder="Broj telefona" oninput="validateAgencyPhone()" required />
                                                 
-                                                <input type="email" name="email" id="emailEdit" class="form-control mb-4" value="${agency.email}" placeholder="Email" required />
+                                                <input type="email" name="email" id="emailEdit" class="form-control mb-4" value="${agency.email}" placeholder="Email" oninput="validateEmail()" required />
                                                 
                                                 <button class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#destinationAddModal">Dodaj destinaciju</button>
                                                 <button onclick="loadDestinationTable()" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#destinationDeleteModal">Izbrisi destinacije</button>
@@ -78,11 +78,60 @@ agencyEditForm.addEventListener("submit", (event) => {
     event.stopPropagation();
 
     if (agencyEditForm.checkValidity()) {
+        var data = new FormData(event.target);
+        var agency = {};
+        for (obj of data) {
+            let [key, value] = obj;
+            agency[key] = value;
+        }
 
+        fetch(`${databaseURL}agencije/${urlParams.get("id")}.json`, {
+            method: 'PUT',
+            body: JSON.stringify(agency)
+        })
+        .then(resp => {
+            if (resp.ok) {
+                var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Uspesno izmenjena agencija.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>`;
+                document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+
+                agencyEditForm.classList.remove("was-validated");
+            } else {
+                window.location.replace("error.html");
+            }
+        })
     } else {
         agencyEditForm.classList.add("was-validated");
     }
 });
+
+const validateLogo = () => {
+    var logoEdit = document.getElementById("logoEdit");
+    if (!validateImageURL(logoEdit.value))
+        logoEdit.setCustomValidity("error");
+    else
+        logoEdit.setCustomValidity("");
+}
+
+const validateEmail = () => {
+    var emailEdit = document.getElementById("emailEdit");
+    if (!emailValidation(emailEdit.value))
+        emailEdit.setCustomValidity("error");
+    else
+        emailEdit.setCustomValidity("");
+}
+
+const validateAgencyPhone = () => {
+    var agencyPhoneEdit = document.getElementById("phoneEdit");
+    if (isNaN(agencyPhoneEdit.value.replace("/", "").replace("-", ""))) {
+        agencyPhoneEdit.setCustomValidity("error");
+    }
+    else {
+        agencyPhoneEdit.setCustomValidity("");
+    }
+}
 
 
 var destinationAddForm = document.getElementById("destinationAddForm");
@@ -99,7 +148,6 @@ destinationAddForm.addEventListener("submit", async (event) => {
         var destination = {};
         for (obj of data) {
             let [key, value] = obj;
-            console.log(obj);
             if (key === "slike") {
                 destination[key] = value.split("\n");
                 continue;
