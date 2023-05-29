@@ -25,11 +25,12 @@ const loadData = async () => {
 
     document.getElementById("edit_agency_name").innerHTML = `<b>${agency.naziv}</b>`
 
-    var agency_data_edit = document.getElementById("agency_data_edit");
-    var row = document.createElement("div");
-    row.classList.add("row");
-    row.innerHTML = agencyDataTemplate(agency);
-    agency_data_edit.insertBefore(row, agency_data_edit.getElementsByClassName("mb-5")[0]);
+    // var agency_data_edit = document.getElementById("agency_data_edit");
+    // var row = document.createElement("div");
+    // row.classList.add("row");
+    // row.innerHTML = agencyDataTemplate(agency);
+    // agency_data_edit.insertBefore(row, agency_data_edit.getElementsByClassName("mb-5")[0]);
+    document.getElementById("agencyEditForm").innerHTML = agencyDataTemplate(agency);
 }
 
 const loadDestinationTable = async() => {
@@ -45,17 +46,17 @@ const loadDestinationTable = async() => {
 
 const agencyDataTemplate = (agency) => `<div class="col-md-12 mb-5" style="padding-left: 10rem; padding-right: 10rem;">
                                             <div class="text-center">
-                                                <input type="text" name="naziv" id="nameEdit" class="form-control mb-4" value="${agency.naziv}" placeholder="Naziv" />
+                                                <input type="text" name="naziv" id="nameEdit" class="form-control mb-4" value="${agency.naziv}" placeholder="Naziv" required />
                                                 
-                                                <input type="text" name="adresa" id="addressEdit" class="form-control mb-4" value="${agency.adresa}" placeholder="Adresa" />
+                                                <input type="text" name="adresa" id="addressEdit" class="form-control mb-4" value="${agency.adresa}" placeholder="Adresa" required />
                                                 
-                                                <input type="text" name="logo" id="logoEdit" class="form-control mb-4" value="${agency.logo}" placeholder="Logo" />
+                                                <input type="text" name="logo" id="logoEdit" class="form-control mb-4" value="${agency.logo}" placeholder="Logo" required />
                                                 
-                                                <input type="number" name="godina" id="yearEdit" class="form-control mb-4" value="${agency.godina}" placeholder="Godina" />
+                                                <input type="number" name="godina" id="yearEdit" class="form-control mb-4" value="${agency.godina}" placeholder="Godina" required />
 
-                                                <input type="text" name="brojTelefona" id="phoneEdit" class="form-control mb-4" value="${agency.brojTelefona}" placeholder="Broj telefona" />
+                                                <input type="text" name="brojTelefona" id="phoneEdit" class="form-control mb-4" value="${agency.brojTelefona}" placeholder="Broj telefona" required />
                                                 
-                                                <input type="email" name="email" id="emailEdit" class="form-control mb-4" value="${agency.email}" placeholder="Email" />
+                                                <input type="email" name="email" id="emailEdit" class="form-control mb-4" value="${agency.email}" placeholder="Email" required />
                                                 
                                                 <button class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#destinationAddModal">Dodaj destinaciju</button>
                                                 <button onclick="loadDestinationTable()" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#destinationDeleteModal">Izbrisi destinacije</button>
@@ -63,7 +64,7 @@ const agencyDataTemplate = (agency) => `<div class="col-md-12 mb-5" style="paddi
                                         </div>
                                         <div class="col-md text-center">
                                             <a href="admin_panel_agencies.html" class="btn btn-outline-danger">Odustani</a>
-                                            <button class="btn btn-outline-primary">Izmeni</button>
+                                            <button type="submit" class="btn btn-outline-primary">Izmeni</button>
                                         </div>`
 
 const destinationTemplate = (destination, id) => `<tr>
@@ -76,4 +77,80 @@ const destinationTemplate = (destination, id) => `<tr>
                                                 </tr>`
 
 document.addEventListener("DOMContentLoaded", loadData);
-// document.getElementById("obrisiDestinacijeBtn").addEventListener("click", loadDestinationTable);
+
+var agencyEditForm = document.getElementById("agencyEditForm");
+agencyEditForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (agencyEditForm.checkValidity()) {
+
+    } else {
+        agencyEditForm.classList.add("was-validated");
+    }
+});
+
+
+var destinationAddForm = document.getElementById("destinationAddForm");
+var imagesAddInput = document.getElementById("imagesAdd");
+
+destinationAddForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (destinationAddForm.checkValidity()) {
+        var agency = await getAgency();
+
+        var data = new FormData(event.target);
+        var destination = {};
+        for (obj of data) {
+            let [key, value] = obj;
+            console.log(obj);
+            if (key === "slike") {
+                destination[key] = value.split("\n");
+                continue;
+            }
+            destination[key] = value;
+        }
+
+        fetch(`${databaseURL}destinacije/${agency.destinacije}.json`, {
+            method: 'POST',
+            body: JSON.stringify(destination)
+        })
+        .then(resp => {
+            if (resp.ok) {
+                let destinationAddModal = document.getElementById("destinationAddModal");
+                destinationAddModal.getElementsByClassName("btn-close")[0].click();
+
+                var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Uspesno dodata agencija.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>`;
+                document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+
+                destinationAddForm.reset();
+                destinationAddForm.classList.remove("was-validated");
+            } else {
+                window.location.replace("error.html");
+            }
+        })
+    } else {
+        destinationAddForm.classList.add("was-validated");
+    }
+});
+
+imagesAddInput.addEventListener("input", () => {
+    var urls = imagesAddInput.value.split("\n");
+    var invalid = false;
+    for (url of urls) {
+        if (!validateImageURL(url)) {
+            invalid = true;
+            imagesAddInput.setCustomValidity("error");
+            break;
+        }
+    }
+    if (!invalid)
+        imagesAddInput.setCustomValidity("");
+})
+
+const validateImageURL = (url) => new RegExp(/\bhttps?:[^)''"]+\.(?:jpg|jpeg|gif|png)/).test(url);

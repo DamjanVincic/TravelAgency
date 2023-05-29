@@ -70,7 +70,9 @@
 
     <div id="agency_data_edit" class="container">
         <hr class="my-5"/>
-        
+        <form id="agencyEditForm" class="needs-validation" novalidate>
+
+        </form>
         <hr class="mb-5"/>
     </div>
 
@@ -91,11 +93,7 @@
         </div>
     </footer>
 
-    <div id="registerAlertPlaceholder" style="position: fixed; bottom: 0; left: 2rem">
-        
-    </div>
-
-    <div id="loginAlertPlaceholder" style="position: fixed; bottom: 0; left: 2rem">
+    <div id="alertPlaceholder" style="position: fixed; bottom: 0; left: 2rem">
         
     </div>
 
@@ -199,51 +197,77 @@
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="destinationAddForm" class="needs-validation" novalidate>
                         <div class="form-outline mb-4">
-                            <input type="text" name="naziv" id="nameAdd" class="form-control" />
+                            <input type="text" name="naziv" id="nameAdd" class="form-control" required />
                             <label for="nameAdd" class="form-label">Naziv</label>
                         </div>
                       
                         
                         <div class="form-outline mb-4">
-                            <input type="number" name="cena" id="priceAdd" class="form-control" />
+                            <input type="number" name="cena" id="priceAdd" class="form-control" required />
                             <label for="priceAdd" class="form-label">Cena</label>
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="number" name="maxOsoba" id="maxNumberOfPeopleAdd" class="form-control" />
+                            <input type="number" name="maxOsoba" id="maxNumberOfPeopleAdd" class="form-control" required />
                             <label for="maxNumberOfPeopleAdd" class="form-label">Broj osoba</label>
                         </div>
 
                         <div class="form-outline mb-4">
-                            <textarea class="form-control mt-3" name="opis" id="descriptionAdd" rows="4"></textarea>
+                            <textarea class="form-control mt-3" name="opis" id="descriptionAdd" rows="4" required></textarea>
                             <label for="descriptionAdd" class="form-label">Opis</label>
                         </div>
                         <div class="form-outline mb-4">
-                            <textarea class="form-control" name="slike" id="imagesAdd" rows="4"></textarea>
+                            <textarea class="form-control" name="slike" id="imagesAdd" rows="4" required></textarea>
                             <label for="imagesAdd" class="form-label">Slike</label>
+                            <div class="invalid-tooltip">Slike moraju da budu u vidu linkova svaki u posebnom redu.</div>
                         </div>
 
-                        <div class="form-outline mb-4">
-                            <select class="form-select" name="tip" id="vacationTypeAdd">
-                                <option selected>Tip letovanja</option>
-                                <option value="Gradovi Evrope">Gradovi Evrope</option>
-                                <option value="Letovanje">Letovanje</option>
-                                <option value="Zimovanje">Zimovanje</option>
-                            </select>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <select class="form-select" name="prevoz" id="transportationAdd">
-                                <option selected>Tip prevoza</option>
-                                <option value="sopstveni">Sopstveni</option>
-                                <option value="autobus">Autobus</option>
-                                <option value="avion">Avion</option>
-                            </select>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Tip letovanja</legend>
+                                  
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="tip" id="europeCities" value="Gradovi Evrope" required>
+                                        <label class="form-check-label" for="europeCities">Gradovi Evrope</label>
+                                    </div>
+                                  
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="tip" id="summer" value="Letovanje">
+                                        <label class="form-check-label" for="summer">Letovanje</label>
+                                    </div>
+                                  
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="tip" id="winter" value="Zimovanje">
+                                        <label class="form-check-label" for="winter">Zimovanje</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Tip prevoza</legend>
+                                  
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="prevoz" id="ownTransportation" value="sopstveni" required>
+                                      <label class="form-check-label" for="ownTransportation">Sopstveni</label>
+                                    </div>
+                                  
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="prevoz" id="bus" value="autobus">
+                                      <label class="form-check-label" for="bus">Autobus</label>
+                                    </div>
+                                  
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="prevoz" id="plane" value="avion">
+                                      <label class="form-check-label" for="plane">Avion</label>
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
                       
-                        <button type="button" class="btn btn-primary btn-block mb-4">Dodajte destinaciju</button>
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Dodajte destinaciju</button>
                     </form>
                 </div>
             </div>
