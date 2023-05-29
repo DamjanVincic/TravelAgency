@@ -24,12 +24,6 @@ const loadData = async () => {
     var agency = await getAgency();
 
     document.getElementById("edit_agency_name").innerHTML = `<b>${agency.naziv}</b>`
-
-    // var agency_data_edit = document.getElementById("agency_data_edit");
-    // var row = document.createElement("div");
-    // row.classList.add("row");
-    // row.innerHTML = agencyDataTemplate(agency);
-    // agency_data_edit.insertBefore(row, agency_data_edit.getElementsByClassName("mb-5")[0]);
     document.getElementById("agencyEditForm").innerHTML = agencyDataTemplate(agency);
 }
 
