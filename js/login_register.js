@@ -32,7 +32,7 @@ registerForm.addEventListener("submit", (event) => {
                                     Uspesna registracija.
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>`;
-                document.getElementById("registerAlertPlaceholder").innerHTML = alertHTML;
+                document.getElementById("alertPlaceholder").innerHTML = alertHTML;
 
                 registerForm.reset();
                 registerForm.classList.remove("was-validated");
@@ -122,7 +122,7 @@ loginForm.addEventListener("submit", async (event) => {
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
         }
-        document.getElementById("loginAlertPlaceholder").innerHTML = alertHTML;
+        document.getElementById("alertPlaceholder").innerHTML = alertHTML;
 
     } else {
         loginForm.classList.add("was-validated");
