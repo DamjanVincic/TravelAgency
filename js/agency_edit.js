@@ -62,7 +62,7 @@ const agencyDataTemplate = (agency) => `<div class="col-md-12 mb-5" style="paddi
                                         </div>`
 
 const destinationTemplate = (destination, id) => `<tr>
-                                                    <td><input type="checkbox" value="${id}"></td>
+                                                    <td><input type="checkbox" name="forDeletion" value="${id}"></td>
                                                     <td>${destination.naziv}</td>
                                                     <td>${destination.tip}</td>
                                                     <td>${destination.prevoz}</td>
@@ -148,3 +148,33 @@ imagesAddInput.addEventListener("input", () => {
 })
 
 const validateImageURL = (url) => new RegExp(/\bhttps?:[^)''"]+\.(?:jpg|jpeg|gif|png)/).test(url);
+
+
+var destinationDeleteModal = document.getElementById("destinationDeleteModal");
+var destinationDeleteButton = document.getElementById("destinationDeleteModalButton");
+var destinationDeleteConfirmationButton = document.getElementById("destinationDeleteConfirmationButton");
+
+destinationDeleteConfirmationButton.addEventListener("click", async () => {
+    var agency = await getAgency();
+
+    var checkboxes = destinationDeleteModal.querySelectorAll('input[type="checkbox"]');
+    
+    for (var checkbox of checkboxes) {
+        if (checkbox.checked)
+            fetch(`${databaseURL}destinacije/${agency.destinacije}/${checkbox.value}.json`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    window.location.replace("error.html");
+                    return;
+                }
+            })
+    }
+    destinationDeleteModal.getElementsByClassName("btn-close")[0].click();
+    var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Uspesna obrisane destinacije.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+    document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+});

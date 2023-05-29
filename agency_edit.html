@@ -301,18 +301,18 @@
                             </table>
                         </div>
                       
-                        <button type="button" class="btn btn-danger btn-block" data-mdb-toggle="modal" data-mdb-target="#destinationDeleteConfirmation">Izbrisi destinacije</button>
+                        <button type="button" id="destinationDeleteModalButton" class="btn btn-danger btn-block" data-mdb-toggle="modal" data-mdb-target="#destinationDeleteConfirmationModal">Izbrisi destinacije</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="destinationDeleteConfirmation" tabindex="-1" aria-labelledby="destinationDeleteConfirmationLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
+    <div class="modal fade" id="destinationDeleteConfirmationModal" tabindex="-1" aria-labelledby="destinationDeleteConfirmationModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content text-center">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="destinationDeleteConfirmationLabel">Brisanje destinacija</h5>
+                    <h5 class="modal-title" id="destinationDeleteConfirmationModalLabel">Brisanje destinacija</h5>
                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -320,7 +320,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-primary" data-mdb-dismiss="modal">Ne</button>
-                    <button type="button" class="btn btn-danger">Da</button>
+                    <button type="button" id="destinationDeleteConfirmationButton" class="btn btn-danger" data-mdb-dismiss="modal">Da</button>
                 </div>
             </div>
         </div>
