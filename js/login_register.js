@@ -64,7 +64,7 @@ passwordRegister.addEventListener("input", () => {
 })
 
 emailRegister.addEventListener("input", () => {
-    if (!validateEmail(emailRegister.value))
+    if (!emailValidation(emailRegister.value))
         emailRegister.setCustomValidity("error");
     else
         emailRegister.setCustomValidity("");
@@ -74,12 +74,14 @@ phoneRegister.addEventListener("input", () => {
     if (isNaN(phoneRegister.value)) {
         phoneRegister.setCustomValidity("error");
     }
-    else {
+    else if (Number(phoneRegister.value) < 0) {
+        phoneRegister.setCustomValidity("error");
+    } else {
         phoneRegister.setCustomValidity("");
     }
 })
 
-const validateEmail = (email) => {
+const emailValidation = (email) => {
     return email.match(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );

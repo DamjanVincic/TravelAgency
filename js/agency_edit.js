@@ -52,8 +52,8 @@ const agencyDataTemplate = (agency) => `<div class="col-md-12 mb-5" style="paddi
                                                 
                                                 <input type="email" name="email" id="emailEdit" class="form-control mb-4" value="${agency.email}" placeholder="Email" oninput="validateEmail()" required />
                                                 
-                                                <button class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#destinationAddModal">Dodaj destinaciju</button>
-                                                <button onclick="loadDestinationTable()" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#destinationDeleteModal">Izbrisi destinacije</button>
+                                                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#destinationAddModal">Dodaj destinaciju</button>
+                                                <button type="button" onclick="loadDestinationTable()" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#destinationDeleteModal">Izbrisi destinacije</button>
                                             </div>
                                         </div>
                                         <div class="col-md text-center">
@@ -125,12 +125,11 @@ const validateEmail = () => {
 
 const validateAgencyPhone = () => {
     var agencyPhoneEdit = document.getElementById("phoneEdit");
-    if (isNaN(agencyPhoneEdit.value.replace("/", "").replace("-", ""))) {
+    var phoneInput = agencyPhoneEdit.value.replace("/", "").replace("-", "");
+    if (isNaN(phoneInput))
         agencyPhoneEdit.setCustomValidity("error");
-    }
-    else {
+    else
         agencyPhoneEdit.setCustomValidity("");
-    }
 }
 
 
