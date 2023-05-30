@@ -74,11 +74,9 @@ agencySearchForm.addEventListener("submit", async (event) => {
         var agencies = await getAgencies();
         var agencyArray = [];
         Object.keys(agencies).forEach(key => agencyArray.push({...agencies[key], 'id': key}));
-        console.log(agencyArray);
         
         if (agencyNameSearch.value) {
             agencyArray = agencyArray.filter(agency => agency.naziv.toLowerCase().includes(agencyNameSearch.value.toLowerCase()));
-            console.log(agencyArray);
         }
         if (agencyDestinationSearch.value) {
             for (let i = agencyArray.length - 1;i >= 0;i--) {
@@ -100,6 +98,7 @@ agencySearchForm.addEventListener("submit", async (event) => {
                         </div>`;
 
             searchLoadData(agencyArray);
+            highlightAgencyText(agencyNameSearch.value);
         }
         document.getElementById("alertPlaceholder").innerHTML = alertHTML;
         document.getElementById("agencySearchModal").getElementsByClassName("btn-close")[0].click();
@@ -135,8 +134,24 @@ const searchLoadData = (agencies) => {
             row = document.createElement("div");
             row.classList.add("row");
         }
-        row.innerHTML += agencyTemplate(agency, agency[id]);
+        row.innerHTML += agencyTemplate(agency, agency.id);
         count++;
     }
     agency_list.insertBefore(row, agency_list.getElementsByClassName("my-5")[1]);
+}
+
+const highlightAgencyText = text => {
+    var cardTitles = document.querySelectorAll(".card-title");
+  
+    for (let cardTitle of cardTitles) {
+    //   const cardTitle = cardTitles[i];
+        var titleText = cardTitle.textContent;
+        var index = titleText.toLowerCase().indexOf(text.toLowerCase());
+    
+        if (index !== -1) {
+            var highlightedText = titleText.substring(index, index + text.length);
+            var html = titleText.replace(new RegExp(highlightedText, "gi"), `<span class="highlight">${highlightedText}</span>`);
+            cardTitle.innerHTML = html;
+        }
+    }
 }

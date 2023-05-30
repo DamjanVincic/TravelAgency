@@ -88,3 +88,7 @@ nav {
 	background-position: center center;
 	height: 100vh;
 }
+
+.highlight {
+	background-color: aqua;
+}
