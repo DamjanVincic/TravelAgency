@@ -137,6 +137,8 @@ const validateAgencyPhone = () => {
 
 var destinationAddForm = document.getElementById("destinationAddForm");
 var imagesAddInput = document.getElementById("imagesAdd");
+var priceAddInput = document.getElementById("priceAdd");
+var numberOfPeopleAddInput = document.getElementById("maxNumberOfPeopleAdd");
 
 destinationAddForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -197,6 +199,29 @@ imagesAddInput.addEventListener("input", () => {
 })
 
 const validateImageURL = (url) => new RegExp(/\bhttps?:[^)''"]+\.(?:jpg|jpeg|gif|png)/).test(url);
+
+priceAddInput.addEventListener("input", () => {
+    if (!/^(?!0)\d*$/.test(priceAddInput.value))
+        priceAddInput.setCustomValidity("error");
+    else
+        priceAddInput.setCustomValidity("");
+});
+
+numberOfPeopleAddInput.addEventListener("input", () => {
+    if (!/^(?!0)\d*$/.test(numberOfPeopleAddInput.value))
+        numberOfPeopleAddInput.setCustomValidity("error");
+    else
+        numberOfPeopleAddInput.setCustomValidity("");
+});
+
+const validateNumber = input => {
+    if (input.value === "" || isNaN(input.value))
+        input.setCustomValidity("error");
+    else if (Number(input.value) < 0)
+        input.setCustomValidity("error");
+    else
+        input.setCustomValidity("");
+};
 
 
 var destinationDeleteModal = document.getElementById("destinationDeleteModal");
