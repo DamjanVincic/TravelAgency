@@ -96,10 +96,10 @@ agencyEditForm.addEventListener("submit", async (event) => {
                                     Uspesno izmenjena agencija.
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>`;
+                                
+                // window.location.replace(`agency.html?id=${urlParams.get("id")}`);
                 document.getElementById("alertPlaceholder").innerHTML = alertHTML;
-
-                window.location.replace(`agency.html?id=${urlParams.get("id")}`);
-                console.log(urlParams.get("id"))
+                // console.log(urlParams.get("id"))
             } else {
                 window.location.replace("error.html");
             }
@@ -127,11 +127,34 @@ const validateEmail = () => {
 
 const validateAgencyPhone = () => {
     var agencyPhoneEdit = document.getElementById("phoneEdit");
-    var phoneInput = agencyPhoneEdit.value.replace("/", "").replace("-", "");
-    if (isNaN(phoneInput))
+    var agencyPhoneEditInput = agencyPhoneEdit.value;
+
+    if (agencyPhoneEditInput.indexOf('/') !== 3 || agencyPhoneEditInput.indexOf('-') !== 8) {
         agencyPhoneEdit.setCustomValidity("error");
+        return;
+    }
+
+    var phoneSplit = agencyPhoneEdit.value.split("/");
+
+    if (isNaN(phoneSplit[0])) {
+        agencyPhoneEdit.setCustomValidity("error");
+        return;
+    }
+    else if(Number(phoneSplit[0]) < 0) {
+        agencyPhoneEdit.setCustomValidity("error");
+        return;
+    }
     else
         agencyPhoneEdit.setCustomValidity("");
+
+    for (var item of phoneSplit[1].split("-")) {
+        if (isNaN(item)) {
+            agencyPhoneEdit.setCustomValidity("error");
+            return;
+        }
+        else
+            agencyPhoneEdit.setCustomValidity("");
+    }
 }
 
 

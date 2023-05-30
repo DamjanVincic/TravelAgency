@@ -45,7 +45,7 @@ const destinationTemplate = destination => `<div class="row">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <fieldset>
-                                                                <legend>Tip letovanja</legend>
+                                                                <legend>Tip odmora</legend>
                                                             
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="tip" id="europeCities" value="Gradovi Evrope" required>
@@ -140,15 +140,15 @@ destinationEditForm.addEventListener("submit", (event) => {
 
 const validatePrice = () => {
     var priceEdit = document.getElementById("priceEdit");
-    if (Number(priceEdit.value) < 0)
+    if (Number(priceEdit.value) <= 0)
         priceEdit.setCustomValidity("error");
     else
         priceEdit.setCustomValidity("");
 }
 
 const validateMaxPeople = () => {
-    var maxPeople = document.getElementById("maxNumberOfPeople");
-    if (Number(maxPeople) < 0)
+    var maxPeople = document.getElementById("maxNumberOfPeopleEdit");
+    if (Number(maxPeople.value) < 0)
         maxPeople.setCustomValidity("error");
     else
         maxPeople.setCustomValidity("");
