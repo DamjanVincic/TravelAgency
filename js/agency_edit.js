@@ -52,8 +52,8 @@ const agencyDataTemplate = (agency) => `<div class="col-md-12 mb-5" style="paddi
                                                 
                                                 <input type="email" name="email" id="emailEdit" class="form-control mb-4" value="${agency.email}" placeholder="Email" oninput="validateEmail()" required />
                                                 
-                                                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#destinationAddModal">Dodaj destinaciju</button>
-                                                <button type="button" onclick="loadDestinationTable()" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#destinationDeleteModal">Izbrisi destinacije</button>
+                                                <button type="button" class="btn btn-primary mb-1" data-mdb-toggle="modal" data-mdb-target="#destinationAddModal">Dodaj destinaciju</button>
+                                                <button type="button" onclick="loadDestinationTable()" class="btn btn-danger mb-1" data-mdb-toggle="modal" data-mdb-target="#destinationDeleteModal">Izbrisi destinacije</button>
                                             </div>
                                         </div>
                                         <div class="col-md text-center">
@@ -73,13 +73,14 @@ const destinationTemplate = (destination, id) => `<tr>
 document.addEventListener("DOMContentLoaded", loadData);
 
 var agencyEditForm = document.getElementById("agencyEditForm");
-agencyEditForm.addEventListener("submit", (event) => {
+agencyEditForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
     if (agencyEditForm.checkValidity()) {
+        var oldAgency = await getAgency();
         var data = new FormData(event.target);
-        var agency = {};
+        var agency = {'destinacije': oldAgency.destinacije};
         for (obj of data) {
             let [key, value] = obj;
             agency[key] = value;
@@ -97,7 +98,8 @@ agencyEditForm.addEventListener("submit", (event) => {
                                 </div>`;
                 document.getElementById("alertPlaceholder").innerHTML = alertHTML;
 
-                agencyEditForm.classList.remove("was-validated");
+                window.location.replace(`agency.html?id=${urlParams.get("id")}`);
+                console.log(urlParams.get("id"))
             } else {
                 window.location.replace("error.html");
             }

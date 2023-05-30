@@ -129,7 +129,7 @@ destinationEditForm.addEventListener("submit", (event) => {
                                 </div>`;
                 document.getElementById("alertPlaceholder").innerHTML = alertHTML;
 
-                agencyEditForm.classList.remove("was-validated");
+                window.location.replace(`destination.html?id=${urlParams.get("id")}&destination_group_id=${urlParams.get("destination_group_id")}`);
             } else {
                 window.location.replace("error.html");
             }
