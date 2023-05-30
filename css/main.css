@@ -92,3 +92,7 @@ nav {
 .highlight {
 	background-color: aqua;
 }
+
+legend {
+	font-weight: bold;
+}

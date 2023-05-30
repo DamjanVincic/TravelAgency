@@ -33,12 +33,9 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light me-3" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </form>
+                <button class="btn btn-outline-light me-3" type="button" data-mdb-toggle="modal" data-mdb-target="#destinationSearchModal">
+                    <i class="bi bi-search"></i>
+                </button>
                 <ul class="navbar-nav">
                     <!-- <button class="btn btn-outline-light my-1 ms-1 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
                         <i class="bi bi-search"></i>
@@ -184,6 +181,70 @@
                         <p class="text-center">Nemate nalog? <a href="" data-mdb-dismiss="modal" data-mdb-toggle="modal" data-mdb-target="#registerModal">Registrujte se</a></p>
                       
                         <button type="submit" class="btn btn-primary btn-block mb-4">Ulogujte se</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="destinationSearchModal" tabindex="-1" aria-labelledby="destinationSearchModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destinationSearchModalLabel">Pretraga destinacija</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="destinationSearchForm" novalidate>
+                        <div class="form-outline mb-4">
+                            <input type="text" id="destinationNameSearch" class="form-control" />
+                            <label for="destinationNameSearch" class="form-label">Naziv destinacije</label>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Tip odmora</legend>
+                                
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="tip" id="europeCities" value="Gradovi Evrope" required>
+                                        <label class="form-check-label" for="europeCities">Gradovi Evrope</label>
+                                    </div>
+                                
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="tip" id="summer" value="Letovanje">
+                                        <label class="form-check-label" for="summer">Letovanje</label>
+                                    </div>
+                                
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="tip" id="winter" value="Zimovanje">
+                                        <label class="form-check-label" for="winter">Zimovanje</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Tip prevoza</legend>
+                                
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="prevoz" id="ownTransportation" value="sopstveni" required>
+                                        <label class="form-check-label" for="ownTransportation">Sopstveni</label>
+                                    </div>
+                                
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="prevoz" id="bus" value="autobus">
+                                        <label class="form-check-label" for="bus">Autobus</label>
+                                    </div>
+                                
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="prevoz" id="plane" value="avion">
+                                        <label class="form-check-label" for="plane">Avion</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                      
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Pretražite</button>
                     </form>
                 </div>
             </div>

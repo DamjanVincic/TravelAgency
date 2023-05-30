@@ -1,9 +1,4 @@
-// import {getAgencies} from './database.js';
-// getAgencies();
-
 const databaseURL = 'https://web-design-project-2023-default-rtdb.europe-west1.firebasedatabase.app/';
-
-// var queryString = decodeURIComponent(window.location.search);
 
 var urlParams = new URLSearchParams(window.location.search);
 
@@ -107,3 +102,109 @@ const destinationTemplate = (destination, id, destination_group_id) => {
 }
 
 document.addEventListener("DOMContentLoaded", loadData);
+
+var destinationSearchForm = document.getElementById("destinationSearchForm");
+var destinationNameSearch = document.getElementById("destinationNameSearch");
+destinationSearchForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    var vacationTypeRadioButton = document.querySelector('input[name="tip"]:checked');
+    var transportationRadioButton = document.querySelector('input[name="prevoz"]:checked');
+    var textToHighlight = [];
+    var alertHTML = null;
+    if (destinationNameSearch.value === "" && !vacationTypeRadioButton && !transportationRadioButton) {
+        alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Morate uneti bar jedan kriterijum za pretragu.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+        document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+    } else {
+        var agency = await getAgency();
+        var destinations = await getDestinations(agency.destinacije);
+        var destinationArray = [];
+        Object.keys(destinations).forEach(key => destinationArray.push({...destinations[key], 'id': key}));
+        
+        if (destinationNameSearch.value) {
+            textToHighlight.push(destinationNameSearch.value);
+            destinationArray = destinationArray.filter(destination => destination.naziv.toLowerCase().includes(destinationNameSearch.value.toLowerCase()));
+        }
+        if (vacationTypeRadioButton) {
+            textToHighlight.push(vacationTypeRadioButton.value);
+            for (let i = destinationArray.length - 1;i >= 0;i--) {
+                if (destinationArray[i].tip !== vacationTypeRadioButton.value)
+                    destinationArray.splice(i, 1);
+            }
+        }
+        if (transportationRadioButton) {
+            textToHighlight.push(transportationRadioButton.value);
+            for (let i = destinationArray.length - 1;i >= 0;i--) {
+                if (destinationArray[i].prevoz !== transportationRadioButton.value)
+                    destinationArray.splice(i, 1);
+            }
+        }
+
+        if (destinationArray.length === 0) {
+            alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Ne postoje agencije sa datim kriterijumima.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+        } else {
+            alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Uspesna pretraga
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+
+            searchLoadData(destinationArray, agency.destinacije);
+            textToHighlight.forEach(item => highlightDestinationText(item));
+            // highlightDestinationText(agencyNameSearch.value);
+        }
+        document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+        document.getElementById("destinationSearchModal").getElementsByClassName("btn-close")[0].click();
+    }
+    destinationSearchForm.reset();
+})
+
+const searchLoadData = (destinations, destination_group_id) => {
+    var destination_list = document.getElementById("destination_list");
+    destination_list.innerHTML = `<hr class="my-5"/>
+                                    <div class="row mb-3">
+                                        <div class="col-md">
+                                            <p class="text-center fs-1">Destinacije</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr class="my-5"/>`;
+    var count = 0;
+    var row = null;
+    for (let destination of destinations) {
+        if (count%3 == 0) {
+            if (row != null) {
+                destination_list.insertBefore(row, destination_list.getElementsByClassName("my-5")[1]);
+            }
+            row = document.createElement("div");
+            row.classList.add("row");
+        }
+        row.innerHTML += destinationTemplate(destination, destination.id, destination_group_id);
+        count++;
+    }
+    destination_list.insertBefore(row, destination_list.getElementsByClassName("my-5")[1]);
+}
+
+const highlightDestinationText = text => {
+    var cardTitles = document.querySelectorAll(".card-title");
+  
+    for (let cardTitle of cardTitles) {
+        var titleText = cardTitle.textContent;
+        var index = titleText.toLowerCase().indexOf(text.toLowerCase());
+    
+        if (index !== -1) {
+            var highlightedText = titleText.substring(index, index + text.length);
+            var html = titleText.replace(new RegExp(highlightedText, "gi"), `<span class="highlight">${highlightedText}</span>`);
+            cardTitle.innerHTML = html;
+        }
+
+        var paragraph = cardTitle.nextElementSibling;
+        paragraph.innerHTML = paragraph.innerHTML.replace(new RegExp(text, "gi"), '<span class="highlight">$&</span>');
+    }
+}
