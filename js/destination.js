@@ -13,6 +13,7 @@ const getDestination = async () => {
 
 const loadData = async () => {
     var destination = await getDestination();
+    document.title = destination.naziv;
     var carousel_inner = document.getElementById("introCarousel").getElementsByClassName("carousel-inner")[0];
     
     var destination_data = document.getElementById("destination_data");

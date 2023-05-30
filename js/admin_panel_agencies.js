@@ -37,7 +37,6 @@ const agencyTemplate = (agency, id, count) => `<tr>
                                                     <td>${agency.brojTelefona}</td>
                                                     <td>${agency.email}</td>
                                                     <td>
-                                                        <!-- <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyEdit"><i class="bi bi-pencil"></i></button> -->
                                                         <a href="agency_edit.html?id=${id}" class="btn btn-outline-primary" type="button"><i class="bi bi-pencil"></i></a>
                                                         <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#agencyDelete" data-agencyid="${id}" data-name="${agency.naziv}"><i class="bi bi-trash"></i></button>
                                                     </td>

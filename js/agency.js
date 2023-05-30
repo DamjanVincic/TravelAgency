@@ -27,6 +27,7 @@ const getDestinations = async (id) => {
 
 const loadData = async () => {
     var agency = await getAgency();
+    document.title = agency.naziv;
     var destinations = await getDestinations(agency.destinacije);
 
     var background_data = document.getElementById("background-data");
