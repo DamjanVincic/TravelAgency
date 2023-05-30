@@ -127,34 +127,11 @@ const validateEmail = () => {
 
 const validateAgencyPhone = () => {
     var agencyPhoneEdit = document.getElementById("phoneEdit");
-    var agencyPhoneEditInput = agencyPhoneEdit.value;
 
-    if (agencyPhoneEditInput.indexOf('/') !== 3 || agencyPhoneEditInput.indexOf('-') !== 8) {
+    if (!/^\d{3}\/\d{4}-\d*$/.test(agencyPhoneEdit.value))
         agencyPhoneEdit.setCustomValidity("error");
-        return;
-    }
-
-    var phoneSplit = agencyPhoneEdit.value.split("/");
-
-    if (isNaN(phoneSplit[0])) {
-        agencyPhoneEdit.setCustomValidity("error");
-        return;
-    }
-    else if(Number(phoneSplit[0]) < 0) {
-        agencyPhoneEdit.setCustomValidity("error");
-        return;
-    }
     else
         agencyPhoneEdit.setCustomValidity("");
-
-    for (var item of phoneSplit[1].split("-")) {
-        if (isNaN(item)) {
-            agencyPhoneEdit.setCustomValidity("error");
-            return;
-        }
-        else
-            agencyPhoneEdit.setCustomValidity("");
-    }
 }
 
 
