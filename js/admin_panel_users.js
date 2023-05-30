@@ -34,7 +34,7 @@ const userTemplate = (user, id, count) => `<tr>
                                                 <td>${user.adresa}</td>
                                                 <td>${user.telefon}</td>
                                                 <td>
-                                                    <button class="btn btn-outline-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#userEdit"><i class="bi bi-pencil"></i></button>
+                                                    <a href="user_edit.html?id=${id}" class="btn btn-outline-primary"><i class="bi bi-pencil"></i></a>
                                                     <button class="btn btn-outline-danger" type="button" data-mdb-toggle="modal" data-mdb-target="#userDelete" data-userid="${id}" data-username="${user.korisnickoIme}"><i class="bi bi-trash"></i></button>
                                                 </td>
                                             </tr>`
@@ -53,7 +53,7 @@ $('#userDelete').on('show.bs.modal', function (event) {
 $("#userDeleteButton").on("click", () => {
     var button = $("#userDeleteButton")
     var id = button.data("userid");
-    // console.log(id)
+
     fetch(`${databaseURL}/korisnici/${id}.json`, {
         method: "DELETE"
     })
