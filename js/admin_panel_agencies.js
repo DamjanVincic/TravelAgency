@@ -19,6 +19,14 @@ const getAgencies = async () => {
 
 const loadData = async () => {
     var agencies = await getAgencies();
+    if (agencies == null) {
+        alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Trenutno nema agencija.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+        document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+        return;
+    }
 
     var count = 1;
     var agency_table = document.getElementById("agencyTable");
