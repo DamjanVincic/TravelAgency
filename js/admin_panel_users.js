@@ -5,15 +5,20 @@ var urlParams = new URLSearchParams(window.location.search);
 const getUsers = async () => {
     const jsonData = await fetch(databaseURL + "korisnici/" + ".json")
                             .then(response => response.json());
-    if (jsonData == null) {
-        window.location.replace("error.html");
-    }
     return jsonData;
 }
 
 
 const loadData = async () => {
     var users = await getUsers();
+    if (users == null) {
+        alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Trenutno nema korisnika.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+        document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+        return;
+    }
 
     var users_table = document.getElementById("usersTable");
     users_table.innerHTML = "";
