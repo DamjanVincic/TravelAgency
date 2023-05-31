@@ -97,9 +97,7 @@ agencyEditForm.addEventListener("submit", async (event) => {
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>`;
                                 
-                // window.location.replace(`agency.html?id=${urlParams.get("id")}`);
                 document.getElementById("alertPlaceholder").innerHTML = alertHTML;
-                // console.log(urlParams.get("id"))
             } else {
                 window.location.replace("error.html");
             }

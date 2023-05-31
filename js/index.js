@@ -23,17 +23,14 @@ const loadData = async () => {
     for (var id in agencies) {
         if (count%3 == 0) {
             if (row != null) {
-                // agency_list.appendChild(row);
                 agency_list.insertBefore(row, agency_list.getElementsByClassName("my-5")[1]);
             }
             row = document.createElement("div");
             row.classList.add("row");
-            // row.appendChild(template(agencies[id]));
         }
         row.innerHTML += agencyTemplate(agencies[id], id);
         count++;
     }
-    // agency_list.appendChild(row);
     agency_list.insertBefore(row, agency_list.getElementsByClassName("my-5")[1]);
 }
 
@@ -144,7 +141,6 @@ const highlightAgencyText = text => {
     var cardTitles = document.querySelectorAll(".card-title");
   
     for (let cardTitle of cardTitles) {
-    //   const cardTitle = cardTitles[i];
         var titleText = cardTitle.textContent;
         var index = titleText.toLowerCase().indexOf(text.toLowerCase());
     

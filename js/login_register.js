@@ -25,8 +25,6 @@ registerForm.addEventListener("submit", (event) => {
         .then(resp => {
             if (resp.ok) {
                 let registerModal = document.getElementById("registerModal");
-                // registerModal.classList.remove("show");
-                // registerModal.classList.add("hide");
                 registerModal.getElementsByClassName("btn-close")[0].click();
 
                 var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">

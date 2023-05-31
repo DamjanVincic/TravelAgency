@@ -62,7 +62,6 @@ $("#agencyDeleteButton").on("click", () => {
     })
     .then(resp => {
         if (resp.ok) {
-            // window.location.reload();
             loadData();
             var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
                                 Uspesno izbrisana agencija.

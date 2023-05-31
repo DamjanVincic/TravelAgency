@@ -157,7 +157,6 @@ destinationSearchForm.addEventListener("submit", async (event) => {
 
             searchLoadData(destinationArray, agency.destinacije);
             textToHighlight.forEach(item => highlightDestinationText(item));
-            // highlightDestinationText(agencyNameSearch.value);
         }
         document.getElementById("alertPlaceholder").innerHTML = alertHTML;
         document.getElementById("destinationSearchModal").getElementsByClassName("btn-close")[0].click();
