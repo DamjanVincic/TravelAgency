@@ -35,7 +35,7 @@ const userEditTemplate = (user) => `<div class="col-md-12 mb-5" style="padding-l
 
                                             <input type="email" name="email" id="emailEdit" class="form-control mb-4" value="${user.email}" placeholder="Email" oninput="validateEmail()" required />
                                             
-                                            <input type="date" name="datumRodjenja" id="birthdayEdit" class="form-control mb-4" value="${user.datumRodjenja}" placeholder="Datum rodjenja" required />
+                                            <input type="date" name="datumRodjenja" id="birthdayEdit" class="form-control mb-4" value="${user.datumRodjenja}" placeholder="Datum rodjenja" oninput="validateBirthday()" required />
                                             
                                             <input type="text" name="adresa" id="addressEdit" class="form-control mb-4" value="${user.adresa}" placeholder="Adresa" required />
 
@@ -109,4 +109,12 @@ const validatePhone = () => {
         phoneEdit.setCustomValidity("error");
     else
         phoneEdit.setCustomValidity("");
+}
+
+const validateBirthday = () => {
+    var birthdayEdit = document.getElementById("birthdayEdit");
+    if (new Date(birthdayEdit.value) > new Date())
+        birthdayEdit.setCustomValidity("error");
+    else
+        birthdayEdit.setCustomValidity("");
 }

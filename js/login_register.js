@@ -3,6 +3,7 @@ var usernameRegister = document.getElementById("usernameRegister");
 var passwordRegister = document.getElementById("passwordRegister");
 var emailRegister = document.getElementById("email");
 var phoneRegister = document.getElementById("phone");
+var birthdayRegister = document.getElementById("birthday");
 
 registerForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -79,6 +80,13 @@ phoneRegister.addEventListener("input", () => {
     } else {
         phoneRegister.setCustomValidity("");
     }
+})
+
+birthdayRegister.addEventListener("input", () => {
+    if (new Date(birthdayRegister.value) > new Date())
+        birthdayRegister.setCustomValidity("error");
+    else
+        birthdayRegister.setCustomValidity("");
 })
 
 const emailValidation = (email) => {
