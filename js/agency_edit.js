@@ -253,7 +253,7 @@ destinationDeleteConfirmationButton.addEventListener("click", async () => {
     }
     destinationDeleteModal.getElementsByClassName("btn-close")[0].click();
     var alertHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        Uspesna obrisane destinacije.
+                        Uspesno obrisane destinacije.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`;
     document.getElementById("alertPlaceholder").innerHTML = alertHTML;

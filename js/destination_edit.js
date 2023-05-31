@@ -140,7 +140,7 @@ destinationEditForm.addEventListener("submit", (event) => {
 
 const validatePrice = () => {
     var priceEdit = document.getElementById("priceEdit");
-    if (Number(priceEdit.value) <= 0)
+    if (!/^(?!0)\d*$/.test(priceEdit.value))
         priceEdit.setCustomValidity("error");
     else
         priceEdit.setCustomValidity("");
@@ -148,7 +148,7 @@ const validatePrice = () => {
 
 const validateMaxPeople = () => {
     var maxPeople = document.getElementById("maxNumberOfPeopleEdit");
-    if (Number(maxPeople.value) < 0)
+    if (!/^(?!0)\d*$/.test(maxPeople.value))
         maxPeople.setCustomValidity("error");
     else
         maxPeople.setCustomValidity("");
