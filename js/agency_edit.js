@@ -14,9 +14,6 @@ const getAgency = async () => {
 const getDestinations = async (id) => {
     const jsonData = await fetch(databaseURL + "destinacije/" + id + ".json")
                             .then(response => response.json());
-    if (jsonData == null) {
-        window.location.replace("error.html");
-    }
     return jsonData;
 }
 
@@ -30,6 +27,7 @@ const loadData = async () => {
 const loadDestinationTable = async() => {
     var agency = await getAgency();
     var destinations = await getDestinations(agency.destinacije);
+    if (destinations == null) return;
 
     var destination_table = document.getElementById("destinationTable");
     destination_table.innerHTML = "";
@@ -238,6 +236,15 @@ destinationDeleteConfirmationButton.addEventListener("click", async () => {
     var agency = await getAgency();
 
     var checkboxes = destinationDeleteModal.querySelectorAll('input[type="checkbox"]');
+    if (checkboxes.length == 0) {
+        destinationDeleteModal.getElementsByClassName("btn-close")[0].click();
+        var alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Niste izabrali ni jednu destinaciju za brisanje.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+        document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+        return;
+    }
     
     for (var checkbox of checkboxes) {
         if (checkbox.checked)
