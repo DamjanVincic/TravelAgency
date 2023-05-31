@@ -14,21 +14,27 @@ const getAgency = async () => {
 const getDestinations = async (id) => {
     const jsonData = await fetch(databaseURL + "destinacije/" + id + ".json")
                             .then(response => response.json());
-    if (jsonData == null) {
-        window.location.replace("error.html");
-    }
     return jsonData;
 }
 
 const loadData = async () => {
     var agency = await getAgency();
     document.title = agency.naziv;
-    var destinations = await getDestinations(agency.destinacije);
-
+    
     var background_data = document.getElementById("background-data");
     background_data.style.backgroundImage = `url(${agency.logo})`;
 
     document.getElementById("agency-data").innerHTML = agencyDataTemplate(agency);
+    
+    var destinations = await getDestinations(agency.destinacije);
+    if (destinations == null) {
+        alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Ova agencija trenutno nema destinacije.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+        document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+        return;
+    }
 
     var destination_list = document.getElementById("destination_list");
     var count = 0;
@@ -122,6 +128,7 @@ destinationSearchForm.addEventListener("submit", async (event) => {
     } else {
         var agency = await getAgency();
         var destinations = await getDestinations(agency.destinacije);
+        if (destinations == null) return;
         var destinationArray = [];
         Object.keys(destinations).forEach(key => destinationArray.push({...destinations[key], 'id': key}));
         
