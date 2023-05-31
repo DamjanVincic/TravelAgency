@@ -46,7 +46,7 @@ const agencyDataTemplate = (agency) => `<div class="col-md-12 mb-5" style="paddi
                                                 
                                                 <input type="text" name="logo" id="logoEdit" class="form-control mb-4" value="${agency.logo}" placeholder="Logo" oninput="validateLogo()" required />
                                                 
-                                                <input type="number" name="godina" id="yearEdit" class="form-control mb-4" value="${agency.godina}" placeholder="Godina" required />
+                                                <input type="number" name="godina" id="yearEdit" class="form-control mb-4" value="${agency.godina}" placeholder="Godina" oninput="validateYear()" required />
 
                                                 <input type="text" name="brojTelefona" id="phoneEdit" class="form-control mb-4" value="${agency.brojTelefona}" placeholder="Broj telefona" oninput="validateAgencyPhone()" required />
                                                 
@@ -130,6 +130,14 @@ const validateAgencyPhone = () => {
         agencyPhoneEdit.setCustomValidity("error");
     else
         agencyPhoneEdit.setCustomValidity("");
+}
+
+const validateYear = () => {
+    const yearEdit = document.getElementById("yearEdit");
+    if (Number(yearEdit.value) < 1)
+        yearEdit.setCustomValidity("error");
+    else
+        yearEdit.setCustomValidity("");
 }
 
 
