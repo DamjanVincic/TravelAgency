@@ -9,14 +9,19 @@ const getAgencies = async () => {
 const getDestinations = async (id) => {
     const jsonData = await fetch(databaseURL + "destinacije/" + id + ".json")
                             .then(response => response.json());
-    if (jsonData == null) {
-        window.location.replace("error.html");
-    }
     return jsonData;
 }
 
 const loadData = async () => {
     var agencies = await getAgencies();
+    if (agencies == null) {
+        alertHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Trenutno nema agencija.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+        document.getElementById("alertPlaceholder").innerHTML = alertHTML;
+        return;
+    }
     var count = 0;
     var agency_list = document.getElementById("agency_list");
     var row = null;
@@ -69,6 +74,7 @@ agencySearchForm.addEventListener("submit", async (event) => {
         document.getElementById("alertPlaceholder").innerHTML = alertHTML;
     } else {
         var agencies = await getAgencies();
+        if (agencies == null) return;
         var agencyArray = [];
         Object.keys(agencies).forEach(key => agencyArray.push({...agencies[key], 'id': key}));
         
@@ -78,6 +84,7 @@ agencySearchForm.addEventListener("submit", async (event) => {
         if (agencyDestinationSearch.value) {
             for (let i = agencyArray.length - 1;i >= 0;i--) {
                 let destinations = await getDestinations(agencyArray[i].destinacije);
+                if (destinations == null) continue;
                 if (!hasDestination(destinations))
                     agencyArray.splice(i, 1);
             }
