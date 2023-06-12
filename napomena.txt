@@ -1,1 +1,0 @@
-U pretrazi agencija na glavnoj strani se ne highlightuju imena destinacija jer se ne prikazuju.
