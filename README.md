@@ -1,11 +1,12 @@
-# Projekat iz Web Dizajna, Semestar 2 SIIT, 2023
+# Travel Agency Website
+This is my implementation of a project from Web Design subject, 2nd Semester, 1st Year of Software Engineering at Faculty of Technical Sciences, Novi Sad.
 
 ## **Sajt za turističke agencije**
-## Korišćene tehnologije:
+## Used technologies:
 - HTML
 - CSS
 - JavaScript
 - jQuery
 <hr />
 
-## Faultet tehničkih nauka, 2023
+## Faculty of Technical Sciences, 2023
